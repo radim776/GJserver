@@ -153,8 +153,39 @@ wss.on('connection', (ws) => {
 			}
 
 			ServerLog("[INFO]","name="+players[ws.playerId].name + " id=" + data.playerId + " : " + data.message);
-			broadcast({ type: 'chat', playerId: data.playerId, name: players[data.playerId].name, message: data.message });
 
+			if(data.message=="!return")
+			{
+				ws.send(JSON.stringify({
+					type: "loadlevel",
+					ldata: currentLevel
+				}));
+				return;
+			}
+			if (data.message=="!list")
+			{
+				const playerList=Object.values(players).map(p => p.name).join(',');
+				ws.send(JSON.stringify({
+					type: 'chat',
+					playerId: 0,
+					name: "SYSTEM",
+					message: "There are " + Object.keys(players).length + " players online: " + playerList
+				}));
+				return;
+			}
+			if (data.message=="!help")
+			{
+				ws.send(JSON.stringify({
+					type: 'chat',
+					playerId: 0,
+					name: "SYSTEM",
+					message: "Availble commands: !return, !list"
+				}));
+				return;
+			}
+
+			broadcast({ type: 'chat', playerId: data.playerId, name: players[data.playerId].name, message: data.message });
+/*
 			if(data.message=="FREE COINS")
 			{
 				let coinlevel="";
@@ -169,15 +200,7 @@ wss.on('connection', (ws) => {
 					ldata: coinlevel
 				}));
 				ws.send(JSON.stringify({ type: 'chat', playerId: 0, name: "SYSTEM", message:"chat '!return' to go back to the main level" }));
-			}
-
-			if(data.message=="!return")
-			{
-				ws.send(JSON.stringify({
-					type: "loadlevel",
-					ldata: currentLevel
-				}));
-			}
+			}*/
 		}
 
 		if (data.type === 'missilec') {

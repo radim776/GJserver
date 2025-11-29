@@ -12,3 +12,10 @@ how to run:
 4. run `node server.js` in the same directory as the server.js file
 5. connect to your server using the IP and PORT you has set
 6. Done!!
+
+---
+
+# CHANGELOG
+
+1.0:
+  Initial Release

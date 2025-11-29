@@ -7,19 +7,19 @@
 		"start": "node server.js"
 	},
 	"dependencies": {
-		"fastify": "^4.21.0",
-		"handlebars": "^4.7.8",
 		"ws": "^8.18.1"
 	},
 	"engines": {
 		"node": "14.x"
 	},
 	"repository": {
-		"url": "https://glitch.com/edit/#!/glitch-mvp-node"
+		"url": "https://github.com/radim776/GJserver"
 	},
 	"license": "apache 2.0",
 	"keywords": [
 		"node",
-		"glitch"
+		"multiplayer",
+		"game-server",
+		"websocket"
 	]
 }
